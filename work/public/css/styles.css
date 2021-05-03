@@ -4,6 +4,10 @@ ul {
   padding: 0px;
 }
 
+li {
+  display: flex;
+}
+
 .done {
   text-decoration: line-through;
   color: #ccc;
