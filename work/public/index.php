@@ -22,37 +22,22 @@ $todos =  $todo->getAll();
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <main>
+  <main data-token="<?= Utils::h($_SESSION['token']); ?>">
     <header>
       <h1>Todos</h1>
-
-      <form action="?action=purge" method="post">
-        <span class="delete">Purge</span>
-        <input type="hidden" name="token" value="<?= Utils::h($_SESSION['token']); ?>">
-      </form>
+      <span class="purge">Purge</span>
     </header>
 
-    <form action="?action=add" method="post">
+    <form>
       <input type="text" name="title" placeholder="Type new todo">
-      <input type="hidden" name="token" value="<?= Utils::h($_SESSION['token']); ?>">
     </form>
 
     <ul>
       <?php foreach($todos as $todo): ?>
-        <li>
-          <input
-            type="checkbox"
-            data-id="<?= Utils::h($todo->id); ?>"
-            data-token="<?= Utils::h($_SESSION['token']);?>"
-            <?= $todo->is_done ? 'checked' : ''; ?>>
-
+        <li data-id="<?= Utils::h($todo->id); ?>">
+          <input type="checkbox" <?= $todo->is_done ? 'checked' : ''; ?>>
           <span><?= Utils::h($todo->title); ?></span>
-
-          <form action="?action=delete" method="post" class="delete-form">
-            <span class="delete">x</span>
-            <input type="hidden" name="id" value="<?= Utils::h($todo->id); ?>">
-            <input type="hidden" name="token" value="<?= Utils::h($_SESSION['token']); ?>">
-          </form>
+          <span class="delete">x</span>
         </li>
       <?php endforeach; ?>
     </ul>
