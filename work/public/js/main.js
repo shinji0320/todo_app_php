@@ -17,4 +17,12 @@
       span.parentNode.submit();
     });
   });
+
+  const purge = document.querySelectorAll(".purge");
+    purge.addEventListener("click", () => {
+    if (!confirm("Are you sure?")) {
+      return;
+    }
+    purge.parentNode.submit();
+  });
 }
